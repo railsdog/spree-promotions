@@ -49,15 +49,16 @@ class PromotionsExtension < Spree::Extension
       end
     end
 
-    Admin::CouponsController.class_eval do
-      before_filter :promotions_submenu
-      def promotions_submenu
-        render_to_string :partial => 'admin/shared/promotions_sub_menu'
-      end
-    end
+    ## Commented out by calas 'cause the submenu was rendered twice.
+    # Admin::CouponsController.class_eval do
+    #   before_filter :promotions_submenu
+    #   def promotions_submenu
+    #     render_to_string :partial => 'admin/shared/promotions_sub_menu'
+    #   end
+    # end
 
     [ProductsController, Spree::BaseController].each{|c| c.helper 'promotions'}
-      
+
     Rails.cache.silence!
 
     # make your helper avaliable in all views
